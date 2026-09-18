@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Treine seu freestyle com seu beat, palavras aleatórias e seu próprio ritmo. Sem IA e sem cadastro.">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>paterimas — seu espaço de treino</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23c5f66b'/%3E%3Cpath d='M10 26V8h7a6 6 0 010 12h-7' fill='none' stroke='%23151917' stroke-width='4'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css"><script defer src="words.js"></script><script defer src="app.js"></script>
+</head>
+<body>
+<div class="shell">
+  <header><a class="brand" href="./" aria-label="paterimas, início"><span class="brand-icon">p.</span> pate<span class="brand-light">rimas</span></a><span class="header-note">SEU ESPAÇO DE FREESTYLE <span class="version">V.01</span></span></header>
+  <main>
+    <nav class="page-nav" aria-label="Modos do paterimas"><a href="index.html" aria-current="page">Treino de palavras</a><a href="resposta.html">Treino de resposta</a><a href="ataques.html">Ataques e beats</a></nav>
+    <div class="intro"><div><p class="eyebrow">SOLTA O BEAT. ENCONTRA A RIMA.</p><h1>O próximo verso é seu.</h1></div><p>Seu beat, suas palavras, seu ritmo.<br>Um treino de cada vez.</p></div>
+    <div class="workspace">
+      <aside class="settings" aria-label="Configurações do treino">
+        <section class="panel"><h2><span class="step">01</span> Escolha o beat</h2>
+          <form id="video-form"><label for="video-url">Link do YouTube</label><div class="input-row"><input id="video-url" type="text" inputmode="url" placeholder="Cole o link do vídeo" autocomplete="off"><button type="submit" class="small-button">Carregar</button></div></form>
+          <div class="video-frame"><div id="player"></div><div id="video-placeholder"><span class="play-icon">▶</span><p>O seu beat entra aqui</p><small>Cole um link ou treine à capela.</small></div></div>
+          <p id="video-message" class="hint" role="status">O vídeo precisa de internet e permitir incorporação.</p>
+          <label class="check"><input id="use-video" type="checkbox" disabled> Usar o vídeo no treino</label>
+          <div class="drop-row"><div><label for="drop">Início do treino</label><input id="drop" type="text" inputmode="decimal" value="0:00" aria-describedby="drop-help"></div><button id="mark-drop" class="outline-button" disabled>Marcar ponto atual</button></div>
+          <p class="hint" id="drop-help">Encontre o drop no vídeo e marque, ou digite min:seg.</p>
+        </section>
+        <section class="panel"><h2><span class="step">02</span> Acerte o ritmo</h2>
+          <fieldset id="intervals"><legend>Uma nova palavra a cada</legend><div class="interval-options">
+            <label><input type="radio" name="interval" value="3"><span>3 s</span></label><label><input type="radio" name="interval" value="5"><span>5 s</span></label><label><input type="radio" name="interval" value="8" checked><span>8 s</span></label><label><input type="radio" name="interval" value="10"><span>10 s</span></label><label><input type="radio" name="interval" value="15"><span>15 s</span></label>
+          </div></fieldset>
+          <label for="source">De onde vêm as palavras?</label><select id="source"><option value="mixed">Dicionário + minhas palavras</option><option value="local">Só o dicionário</option><option value="custom">Só minhas palavras</option></select>
+          <details><summary>Minhas palavras <span id="custom-count">0</span></summary><label for="custom-words">Separe por vírgula ou por linha</label><textarea id="custom-words" rows="3" placeholder="Cajati, Corinthians, universo…" maxlength="20000"></textarea><button id="save-words" class="outline-button">Salvar palavras</button><p id="custom-message" class="hint" role="status">Salvas apenas neste navegador.</p></details>
+        </section>
+      </aside>
+      <section class="stage" aria-label="Treino de rima">
+        <div class="stage-top"><span class="eyebrow">SESSÃO DE FREESTYLE</span><span id="status" class="status">PRONTO PARA RIMAR</span></div>
+        <div class="word-area"><span id="word-label" class="word-label">RESPIRE FUNDO E VAI</span><h2 id="word" aria-live="polite" aria-atomic="true">Sua voz.<br><span>Sem limites.</span></h2><p id="word-hint">Aperte começar. Deixe a primeira palavra puxar o verso.</p></div>
+        <div class="countdown"><div class="countdown-label"><span>PRÓXIMA PALAVRA</span><span id="remaining">8 s</span></div><div class="progress-track"><div id="progress"></div></div></div>
+        <div class="stats"><div><span id="elapsed">00:00</span><small>TEMPO DE TREINO</small></div><div><span id="used">0</span><small>PALAVRAS USADAS</small></div><div><span id="pace">8<span class="unit"> s</span></span><small>SEU INTERVALO</small></div></div>
+        <div class="controls"><button id="start" class="primary-button">▶ <span>Começar treino</span></button><button id="skip" class="outline-button skip-button" disabled>Pular palavra <span aria-hidden="true">↠</span></button><button id="stop" class="stop-button" disabled>■ <span>Parar</span></button></div>
+        <p id="session-message" class="session-message" role="status">Pode começar sem vídeo. O importante é praticar.</p>
+      </section>
+    </div>
+  </main>
+  <footer><span>paterimas <span class="footer-separator">/</span> PRÁTICA, NÃO PERFEIÇÃO.</span><span>Sem IA. Sem cadastro. Só flow.</span></footer>
+</div>
+</body></html>

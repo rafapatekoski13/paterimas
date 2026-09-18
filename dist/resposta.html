@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="description" content="Treine respostas de 50 segundos com ataques da sua coleção, beats e palavras aleatórias.">
+  <title>Treino de resposta — paterimas</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23c5f66b'/%3E%3Cpath d='M10 26V8h7a6 6 0 010 12h-7' fill='none' stroke='%23151917' stroke-width='4'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css"><script defer src="collection.js"></script><script defer src="words.js"></script><script defer src="resposta.js"></script>
+</head>
+<body><div class="shell">
+  <header><a class="brand" href="index.html" aria-label="paterimas, início"><span class="brand-icon">p.</span> pate<span class="brand-light">rimas</span></a><span class="header-note">SEU ESPAÇO DE FREESTYLE <span class="version">V.01</span></span></header>
+  <main>
+    <nav class="page-nav" aria-label="Modos do paterimas"><a href="index.html">Treino de palavras</a><a href="resposta.html" aria-current="page">Treino de resposta</a><a href="ataques.html">Ataques e beats</a></nav>
+    <div class="intro"><div><p class="eyebrow">OUVIU O ATAQUE? DEVOLVE NO VERSO.</p><h1>Agora é sua resposta.</h1></div><p>Um ataque. Seu beat.<br>50 segundos para responder.</p></div>
+    <div class="workspace response-workspace">
+      <aside class="settings" aria-label="Configurar treino de resposta">
+        <section class="panel">
+          <h2>Prepare sua sessão</h2><p id="response-collection" class="hint"></p>
+          <p><a class="text-link" href="ataques.html">Cadastrar ou importar ataques e beats →</a></p>
+          <label class="check"><input type="checkbox" id="response-use-beat"> Usar beats da coleção</label>
+          <p id="beat-mode-hint" class="hint"></p>
+          <label class="check"><input type="checkbox" id="response-use-words"> Mostrar palavras aleatórias</label>
+          <label for="response-interval">Intervalo entre palavras</label><select id="response-interval" disabled><option value="3">3 segundos</option><option value="5">5 segundos</option><option value="8" selected>8 segundos</option><option value="10">10 segundos</option><option value="15">15 segundos</option></select>
+          <p class="hint">As palavras vêm do dicionário local. Os ataques são sorteados sem repetição até passar por toda a coleção.</p>
+        </section>
+        <section class="panel"><h2>O ataque</h2><p id="selected-attack" class="selected-track">O próximo trecho aparece aqui.</p><div class="video-frame"><div id="response-attack-player"></div></div></section>
+        <section id="response-beat-panel" class="panel"><h2>Seu beat</h2><p id="selected-beat" class="selected-track">À capela</p><div class="video-frame"><div id="response-beat-player"></div></div></section>
+      </aside>
+      <section class="stage response-stage" aria-label="Sua resposta">
+        <div class="stage-top"><span class="eyebrow">TREINO DE RESPOSTA</span><span id="response-status" class="status">PRONTO</span></div>
+        <ol class="response-steps" aria-label="Etapas do treino"><li id="step-attack">01 · Ataque</li><li id="step-prepare">02 · Prepara</li><li id="step-answer">03 · Resposta</li></ol>
+        <div class="response-clock"><span id="response-time">50</span><span id="response-time-label">SEGUNDOS PARA RESPONDER</span></div>
+        <h2 id="response-word" class="response-word" aria-live="polite">Escute. Conecte. Responda.</h2>
+        <p id="response-word-timer" class="hint"></p>
+        <div class="progress-track"><div id="response-progress"></div></div>
+        <div class="response-stats"><span>Rodada <strong id="response-round">0</strong></span><span>Respostas concluídas <strong id="response-completed">0</strong></span></div>
+        <div class="response-controls"><button id="response-start" class="primary-button">▶ Começar treino</button><button id="response-next" class="outline-button" disabled>Próximo ataque</button><button id="response-stop" class="stop-button" disabled>■ Parar</button><button id="response-skip-word" class="outline-button" hidden disabled>Pular palavra ↠</button></div>
+        <p id="response-message" class="session-message" role="status">Ouça o ataque inteiro. Depois da preparação, começa seu tempo.</p>
+        <button id="response-without-beat" class="outline-button" hidden>Continuar sem beat</button>
+      </section>
+    </div>
+  </main>
+  <footer><span>paterimas <span class="footer-separator">/</span> PRÁTICA, NÃO PERFEIÇÃO.</span><span>Sem IA. Sem cadastro. Só flow.</span></footer>
+</div></body></html>

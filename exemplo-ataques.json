@@ -1,0 +1,25 @@
+{
+  "format": "paterimas.attacks",
+  "version": 1,
+  "attacks": [
+    {
+      "title": "Exemplo técnico de trecho (não é uma batalha)",
+      "youtubeUrl": "https://www.youtube.com/watch?v=M7lc1UVf-VE",
+      "startSeconds": 134,
+      "endSeconds": 148
+    },
+    {
+      "title": "Outro trecho do mesmo vídeo de exemplo",
+      "youtubeUrl": "https://www.youtube.com/watch?v=M7lc1UVf-VE",
+      "startSeconds": 31,
+      "endSeconds": 40
+    }
+  ],
+  "beats": [
+    {
+      "title": "Beat de exemplo — ALL CITY / Fat Cat Beats",
+      "youtubeUrl": "https://www.youtube.com/watch?v=zwNFSwibCww",
+      "dropSeconds": 15
+    }
+  ]
+}

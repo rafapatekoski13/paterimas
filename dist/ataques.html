@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Monte sua coleção de ataques de batalhas. Marque os trechos e compartilhe a lista em JSON, sem cadastro.">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Cadastrar ataques — paterimas</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23c5f66b'/%3E%3Cpath d='M10 26V8h7a6 6 0 010 12h-7' fill='none' stroke='%23151917' stroke-width='4'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css"><script defer src="collection.js"></script><script defer src="ataques.js"></script>
+</head>
+<body>
+<div class="shell">
+  <header><a class="brand" href="index.html" aria-label="paterimas, início"><span class="brand-icon">p.</span> pate<span class="brand-light">rimas</span></a><span class="header-note">SEU ESPAÇO DE FREESTYLE <span class="version">V.01</span></span></header>
+  <main>
+    <nav class="page-nav" aria-label="Modos do paterimas"><a href="index.html">Treino de palavras</a><a href="resposta.html">Treino de resposta</a><a href="ataques.html" aria-current="page">Ataques e beats</a></nav>
+    <div class="intro"><div><p class="eyebrow">ESCUTA O ATAQUE. PREPARA A RESPOSTA.</p><h1>Sua coleção de ataques.</h1></div><p>Marque os trechos de uma batalha.<br>Leve a lista ou compartilhe com alguém.</p></div>
+    <div class="attack-workspace">
+      <section class="panel attack-form-panel" aria-labelledby="form-heading">
+        <h2 id="form-heading"><span class="step">01</span> Cadastrar ataque</h2>
+        <form id="attack-form" novalidate>
+          <label for="attack-title">Nome do ataque <span class="optional">opcional</span></label>
+          <input id="attack-title" maxlength="120" placeholder="Ex.: provocação sobre a cidade">
+          <label for="attack-url">Link do vídeo no YouTube</label>
+          <input id="attack-url" type="text" inputmode="url" required placeholder="https://www.youtube.com/watch?v=…" aria-describedby="attack-form-message">
+          <div class="time-fields"><div><label for="attack-start">Começo do ataque</label><input id="attack-start" type="text" inputmode="decimal" required placeholder="2:14" aria-describedby="attack-time-help attack-form-message"></div><div><label for="attack-end">Final do ataque</label><input id="attack-end" type="text" inputmode="decimal" required placeholder="2:28" aria-describedby="attack-time-help attack-form-message"></div></div>
+          <p class="hint" id="attack-time-help">Use min:seg, h:min:seg ou segundos. Ex.: 2:14 até 2:28.</p>
+          <div class="attack-form-actions"><button id="save-attack" class="primary-button" type="submit">Adicionar à coleção</button><button id="preview-draft" class="outline-button" type="button">Ouvir trecho</button><button id="cancel-edit" class="outline-button" type="button" hidden>Cancelar edição</button></div>
+          <p id="attack-form-message" class="hint" role="status">Você pode cadastrar vários trechos do mesmo vídeo.</p>
+        </form>
+        <section id="attack-preview" class="attack-preview" aria-label="Prévia do ataque" hidden>
+          <div class="preview-heading"><h3 id="preview-title">Ouvir trecho</h3><button id="close-preview" type="button" class="outline-button" aria-label="Fechar prévia">Fechar</button></div>
+          <div id="preview-player" class="video-frame"></div>
+          <p class="hint">A prévia precisa de internet e de um vídeo que permita incorporação. Se não tocar, use o play do vídeo.</p>
+        </section>
+      </section>
+      <section class="panel collection-panel" aria-labelledby="collection-heading">
+        <div class="collection-heading"><div><p class="eyebrow">SEUS TRECHOS, EM UM SÓ LUGAR</p><h2 id="collection-heading">Minha coleção <span id="attack-count" class="collection-count">0</span></h2></div><span class="local-badge">NESTE NAVEGADOR</span></div>
+        <div class="collection-toolbar"><button id="export-attacks" class="primary-button" disabled>↓ Exportar JSON</button><button id="import-attacks" class="outline-button">Importar JSON</button><input id="import-file" type="file" accept=".json,application/json" hidden></div>
+        <p id="collection-message" class="hint" role="status">O JSON reúne ataques e beats. Quem receber pode importar e treinar.</p>
+        <div id="export-panel" class="export-panel" hidden><label for="export-json">JSON da coleção</label><textarea id="export-json" rows="8" readonly spellcheck="false"></textarea><p class="hint">Se o download não começar, copie este conteúdo e salve em um arquivo com extensão .json.</p></div>
+        <p id="storage-message" class="hint">Salvo apenas neste navegador. Exporte uma cópia para guardar ou compartilhar.</p>
+        <div id="undo-area" class="undo-area" hidden><span>Trecho removido.</span><button id="undo-remove" class="outline-button">Desfazer</button></div>
+        <div id="attack-empty" class="attack-empty"><span class="empty-brackets" aria-hidden="true">[ ]</span><h3>O primeiro ataque começa aqui.</h3><p>Adicione o link e as duas minutagens<br>ou importe uma coleção em JSON.</p></div>
+        <ol id="attack-list" class="attack-list"></ol>
+        <details class="format-help"><summary>Como funciona o arquivo JSON?</summary><p>Ele guarda ataques e beats, sem baixar os vídeos. Você pode editar o arquivo e importar novamente. Registros repetidos são ignorados; a importação acrescenta à coleção. Arquivos antigos, só com ataques, continuam funcionando.</p><pre><code>{
+  "format": "paterimas.attacks",
+  "version": 1,
+  "attacks": [
+    {
+      "title": "Nome do ataque",
+      "youtubeUrl": "https://www.youtube.com/watch?v=ID_DO_VIDEO",
+      "startSeconds": 134,
+      "endSeconds": 148
+    }
+  ],
+  "beats": [
+    {
+      "title": "Nome do beat",
+      "youtubeUrl": "https://www.youtube.com/watch?v=ID_DO_BEAT",
+      "dropSeconds": 31
+    }
+  ]
+}</code></pre><p class="hint">Troque os identificadores pelos de vídeos reais. Tempos em segundos. Limite: 1.000 ataques, 1.000 beats e 2 MB por arquivo. Apenas JSON é aceito.</p></details>
+      </section>
+    </div>
+    <section class="panel beats-section" aria-labelledby="beats-heading">
+      <div class="collection-heading"><h2 id="beats-heading">Seus beats <span id="beat-count" class="collection-count">0</span></h2><a class="text-link" href="resposta.html">Ir para o treino de resposta →</a></div>
+      <p class="hint">Cadastre o instrumental e o drop. Com um beat, ele toca em todas as respostas. Com vários, o treino alterna entre eles.</p>
+      <div class="beats-workspace">
+        <form id="beat-form" novalidate>
+          <label for="beat-title">Nome do beat <span class="optional">opcional</span></label><input id="beat-title" maxlength="120" placeholder="Ex.: Boom bap para resposta">
+          <label for="beat-url">Link do beat no YouTube</label><input id="beat-url" inputmode="url" placeholder="https://www.youtube.com/watch?v=…" required>
+          <label for="beat-drop">Drop do beat</label><input id="beat-drop" inputmode="decimal" value="0:00" placeholder="0:31" required>
+          <div class="attack-form-actions"><button id="save-beat" class="primary-button" type="submit">Adicionar beat</button><button id="cancel-beat-edit" class="outline-button" type="button" hidden>Cancelar edição</button></div>
+          <p id="beat-message" class="hint" role="status">Use min:seg, h:min:seg ou segundos. Beats entram no mesmo JSON dos ataques.</p>
+        </form>
+        <div><p id="beat-empty" class="hint">Nenhum beat cadastrado. Você também pode responder à capela.</p><ul id="beat-list" class="attack-list"></ul><button id="undo-beat" class="outline-button" hidden>Desfazer remoção do beat</button></div>
+      </div>
+    </section>
+  </main>
+  <footer><span>paterimas <span class="footer-separator">/</span> PRÁTICA, NÃO PERFEIÇÃO.</span><span>Sem IA. Sem cadastro. Só flow.</span></footer>
+</div>
+</body></html>

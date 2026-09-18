@@ -1,0 +1,1 @@
+{"name":"paterimas","version":"1.1.0","private":true,"description":"Treino de freestyle e resposta sem IA e sem backend","scripts":{"start":"node server.mjs","check":"node --check dist/app.js && node --check dist/words.js && node --check dist/collection.js && node --check dist/ataques.js && node --check dist/resposta.js && node --check server.mjs"}}
